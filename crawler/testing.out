@@ -1,0 +1,45 @@
+rm -fr dir
+mkdir dir
+bash testing.sh
+
+
+----------------------------------------------------------------Testing: incorrect arguments
+
+Input: ./crawler 1 2 3 4
+Need 3 arguments
+
+
+----------------------------------------------------------------Testing: out of depth range
+
+Input: ./crawler http://old-www.cs.dartmouth.edu/~cs50/index.html dir 12
+Max depth must be between 0 and 10
+
+
+----------------------------------------------------------------Testing: nonexistent directory
+
+Input: ./crawler http://old-www.cs.dartmouth.edu/~cs50/index.html sdfsdf 12
+Invalid directory
+
+
+----------------------------------------------------------------Testing: invalid URL
+
+Input: ./crawler http://www.wikipedia.org/ dir 3
+seedURL is invalid
+
+
+----------------------------------------------------------------Testing: cyclical URL
+
+Input: ./crawler http://old-www.cs.dartmouth.edu/~cs50/data/tse/letters/index.html 3
+Success
+
+
+----------------------------------------------------------------Testing: cyclical URL with different seed
+
+Input: ./crawler http://old-www.cs.dartmouth.edu/~cs50/data/tse/letters/A.html 3
+Success
+
+
+----------------------------------------------------------------Testing: wikipedia playground
+
+Input: ./crawler http://old-www.cs.dartmouth.edu/~cs50/data/tse/wikipedia/index.html dir 2
+Success
