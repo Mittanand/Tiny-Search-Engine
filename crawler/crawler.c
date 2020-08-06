@@ -92,11 +92,11 @@ int main(int argc, char *argv[]) {
 int 
 crawler(hashtable_t *visited, bag_t *toCrawl, char *seedURL, char *pageDirectory, int maxDepth) {
     int id = 1;
-
     //initialize seed page
     webpage_t *seed = webpage_new(seedURL, 0, NULL);
     if (seed == NULL) {
         printf("Failed to make seed page\n");
+	free(seed);
         return 1;
     }
 
