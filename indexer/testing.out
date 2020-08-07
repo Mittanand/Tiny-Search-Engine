@@ -9,23 +9,20 @@ Must have 2 arguments
 ----------------------------------------------------------------Indexer Testing: bad arguments
 
 Input: ./indexer ../crawler/fakedir test
-Invalid directory hello
+Invalid directory
 
 
 ----------------------------------------------------------------Indexer Testing: non crawler produced directory
 
 Input: ./indexer ../crawler/notcrawler test
-Invalid directory hello
+Invalid directory
 
-
-----------------------------------------------------------------Indexer Testing: invalid file
-
-Input: ./indexer ../crawler/dir testdir
 
 
 ----------------------------------------------------------------Indextest Testing: Invalid number of arguments 
 
-Input: ./indextest 1 2 3Must have 2 arguments
+Input: ./indextest 1 2 3
+Must have 2 arguments
 
 
 ----------------------------------------------------------------Indextest Testing: bad arguments
