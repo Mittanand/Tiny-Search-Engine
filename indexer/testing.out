@@ -1,0 +1,42 @@
+
+
+----------------------------------------------------------------Indexer Testing: incorrect number arguments
+
+Input: ./indexer 1 2 3
+Must have 2 arguments
+
+
+----------------------------------------------------------------Indexer Testing: bad arguments
+
+Input: ./indexer ../crawler/fakedir test
+Invalid directory hello
+
+
+----------------------------------------------------------------Indexer Testing: non crawler produced directory
+
+Input: ./indexer ../crawler/notcrawler test
+Invalid directory hello
+
+
+----------------------------------------------------------------Indexer Testing: invalid file
+
+Input: ./indexer ../crawler/dir testdir
+
+
+----------------------------------------------------------------Indextest Testing: Invalid number of arguments 
+
+Input: ./indextest 1 2 3Must have 2 arguments
+
+
+----------------------------------------------------------------Indextest Testing: bad arguments
+
+Input: ./indextest fakefile testout
+File is not readable
+
+
+----------------------------------------------------------------Testing: Correct functioning 
+
+Input: ./indexer ../crawler/dir test
+Input: ./indextest test testout
+Sorting test and testout
+Comparing sorted files...
