@@ -50,6 +50,22 @@ bool pagescanner(webpage_t *page, bag_t *toCrawl, hashtable_t *visited);
 bool pagesaver(webpage_t *page, char *pageDirectory, int id);
 
 
+/**************** isCrawlerDirectory ****************/
+/*
+*Check if dir is valid directory
+*Ensure dir is produced by crawler
+*/
+bool isCrawlerDirectory(char *dir);
+
+/**************** pageLoader ****************/
+/*
+*takes pages from crawler output and returns webpage struct
+*using page information
+*
+*/
+webpage_t *pageLoader(char *dir, int id);
+
+
 
 
 #endif //__PAGEDIR_H

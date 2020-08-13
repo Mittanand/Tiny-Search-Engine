@@ -1,5 +1,5 @@
 /* 
- * pagedir.c - CS50 'counters' module
+ * pagedir.c - CS50 common library functionality
  *
  * see pagedir.h for more information.
  *
@@ -12,6 +12,7 @@
 #include "../libcs50/bag.h"
 #include "../libcs50/hashtable.h"
 #include "../libcs50/webpage.h"
+#include "../libcs50/file.h"
 
 /**************** pagefetcher ****************/
 bool 
@@ -71,4 +72,80 @@ pagesaver(webpage_t *page, char *pageDirectory, int id) {
     fclose(fp);
     free(fpath);
     return true;
+}
+
+bool 
+isCrawlerDirectory(char *dir) {
+    //check if ./crawler is in dir, meaning it is crawler produce
+    char *fpath = malloc((strlen(dir) + 9) * sizeof(char)); 
+    if (fpath == NULL) {
+        return false;
+    }
+    //create path
+    sprintf(fpath, "%s%s", dir, ".crawler");
+
+    //see if file is valid
+    FILE* fp;
+    if ((fp = fopen(fpath, "w")) == NULL) {
+        printf("Invalid directory\n");
+        free(fpath);
+        return false;
+    }
+    free(fpath);
+    fclose(fp);
+    return true;
+}
+
+webpage_t*
+pageLoader(char *dir, int id) {
+    char *fpath = malloc((strlen(dir)+11)*sizeof(char));   //accounting for large int id's
+    //check if file path is valid and writable
+    if (fpath == NULL) {
+        fprintf(stderr, "Couldn't allocate space for file pathname\n");
+        return NULL;
+    }
+
+    //create path of format dir/id
+    if (sprintf(fpath, "%s%d", dir, id) < 0) {
+        fprintf(stderr, "Failed to write to fpath\n");
+        free(fpath);
+        return NULL;
+    }
+    FILE *fp = fopen(fpath, "r");
+    if (fp == NULL) {
+        free(fpath);
+        return NULL;
+    }
+
+    //initialize items held in webpage struct
+    char *url = freadlinep(fp);
+    char *depth = freadlinep(fp);
+    char *html = freadfilep(fp);
+    int maxDepth;
+    //if fail to scan to maxDepth int
+    if(sscanf(depth, "%d", &maxDepth) == 0) {
+        fprintf(stderr, "Failed to get maxDepth\n");
+        free(url);
+        free(depth);
+        free(html);
+        return NULL;
+    }
+
+    //if webpage cannot be initialized
+    webpage_t *loaded = webpage_new(url, maxDepth, html);
+    if (loaded == NULL) {
+        fprintf(stderr, "Failed to get maxDepth\n");
+        free(url);
+        free(depth);
+        free(html);
+        return NULL;
+    }
+
+    //cleaning
+    free(depth);
+    free(fpath);
+    fclose(fp);
+
+    return loaded;
+
 }
