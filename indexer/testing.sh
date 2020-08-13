@@ -32,16 +32,8 @@ printf "Input: ./indexer ../crawler/notcrawler test\n"
 printf "\n\n----------------------------------------------------------------"
 
 
-printf "Indexer Testing: invalid file\n\n"
-
-printf "Input: ./indexer ../crawler/dir testdir\n"
-Input: ./indexer ../crawler/dir testdir
-
-
-printf "\n\n----------------------------------------------------------------"
-
 printf "Indextest Testing: Invalid number of arguments \n\n"
-printf "Input: ./indextest 1 2 3"
+printf "Input: ./indextest 1 2 3\n"
 ./indextest 1 2 3
 
 
