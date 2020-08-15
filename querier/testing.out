@@ -1,0 +1,63 @@
+gcc -Wall -pedantic -std=c11 -ggdb   -c -o querier.o querier.c
+gcc -Wall -pedantic -std=c11 -ggdb querier.o ../common/common.a ../libcs50/libcs50.a  -o querier
+bash testing.sh
+
+
+--------------------------------------------------------Testing: Incorrect number arguments
+Input: ./querier 1 2 3
+Invalid number of args
+
+
+--------------------------------------------------------Testing: bad arguments
+Input: ./querier fakedir fakefile
+Invalid directory
+Invalid pageDirectory
+
+--------------------------------------------------------Testing: bad query
+Input: ./querier ../crawler/dir ../indexer/test
+Query? Cannot begin or end with "and" or "or"
+Query? 
+
+--------------------------------------------------------Testing: bad query
+Input: ./querier ../crawler/dir ../indexer/test
+Query? Query contains non-letter
+Query? 
+
+--------------------------------------------------------Testing: bad query
+Input: ./querier ../crawler/dir ../indexer/test
+Query? Cannot begin or end with "and" or "or"
+Query? 
+
+--------------------------------------------------------Testing: good query
+Input: ./querier ../crawler/dir ../indexer/test
+Query? Query: the
+Matches 1 documents (ranked):
+score   1 doc      1: http://old-www.cs.dartmouth.edu/~cs50/data/tse/letters/index.html
+Query? 
+
+--------------------------------------------------------Testing: good query
+Input: ./querier ../data/letters ../data/index.letters
+Query? Query: tse or for breadth or the first
+Matches 3 documents (ranked):
+score   1 doc      1: http://old-www.cs.dartmouth.edu/~cs50/data/tse/letters/
+score   1 doc      3: http://old-www.cs.dartmouth.edu/~cs50/data/tse/letters/index.html
+score   1 doc      4: http://old-www.cs.dartmouth.edu/~cs50/data/tse/letters/B.html
+Query? 
+
+--------------------------------------------------------Testing: good query
+Input: ./querier ../data/letters ../data/index.letters
+Query? Query: tse this or biology
+Matches 3 documents (ranked):
+score   1 doc      1: http://old-www.cs.dartmouth.edu/~cs50/data/tse/letters/
+score   1 doc      3: http://old-www.cs.dartmouth.edu/~cs50/data/tse/letters/index.html
+score   1 doc      7: http://old-www.cs.dartmouth.edu/~cs50/data/tse/letters/C.html
+Query? 
+
+--------------------------------------------------------Testing: good query
+Input: ./querier ../data/letters ../data/index.letters
+Query? Query: tse or biology or this and this and for
+Matches 3 documents (ranked):
+score   2 doc      1: http://old-www.cs.dartmouth.edu/~cs50/data/tse/letters/
+score   2 doc      3: http://old-www.cs.dartmouth.edu/~cs50/data/tse/letters/index.html
+score   1 doc      7: http://old-www.cs.dartmouth.edu/~cs50/data/tse/letters/C.html
+Query? 
