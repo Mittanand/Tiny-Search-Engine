@@ -5,7 +5,7 @@
 The `crawler` traverses URL's starting from a given seed and explores and stores the html to find further URLs
 
 ### Usage
-`./crawler seedURL pageDirectory maxDepth`
+Enter `./crawler seedURL pageDirectory maxDepth` to run crawler after compilation.
 
 See `IMPLEMENTATION.md` for more details
 
